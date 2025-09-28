@@ -10,4 +10,15 @@ def can_construct(ransomNote: str, magazine: str) -> bool:
     Returns:
         bool: True if ransomNote can be constructed, False otherwise.
     """
-    pass  # TODO: Implement this function
+    # Build frequency dictionary for magazine characters
+    letter_counts = {}
+    for char in magazine:
+        letter_counts[char] = letter_counts.get(char, 0) + 1
+
+    # Check each character in ransomNote
+    for char in ransomNote:
+        if char not in letter_counts or letter_counts[char] == 0:
+            return False
+        letter_counts[char] -= 1  # use one occurrence
+
+    return True
